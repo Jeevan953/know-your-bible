@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Know Your Bible</title>
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+<style>
+body { font-family: Arial, sans-serif; padding: 20px; }
+#verseBox { margin: 20px 0; padding: 15px; border: 1px solid #ccc; border-radius: 8px; background: #f9f9f9; }
+button { margin: 5px; padding: 10px; cursor: pointer; }
+</style>
+</head>
+<body>
+
+<h1>📖 Know Your Bible</h1>
+
+<div id="verseBox">
+  <strong>Verse of the Day:</strong>
+  <p id="verseText">Loading...</p>
+  <p id="verseRef"></p>
+</div>
+
+<div>
+
+
+  <button id="musicButton" onclick="toggleMusic('backgroundMusic','musicButton')">Play Hindi 🎼</button>
+  <button id="tamilButton" onclick="toggleMusic('tamilMusic','tamilButton')">Play Tamil 🎶</button>
+  <button id="englishButton" onclick="toggleMusic('englishMusic','englishButton')">Play English 🎵</button>
+</div>
+
+<button onclick="triggerConfetti()">🎉 Celebrate</button>
+
+<audio id="backgroundMusic" loop>
+  <source src="music/hindi/Yeh Tera Husn.mp3" type="audio/mp3">
+</audio>
+
+<audio id="tamilMusic" loop>
+  <source src="music/tamil/Yeasu_Rajanae.mp3" type="audio/mp3">
+</audio>
+
+<audio id="englishMusic" loop>
+  <source src="music/english/Jesus Messiah.mp3" type="audio/mp3">
+</audio>
+
+<div>
+  <label for="volumeControl">Volume Control: </label>
+  <input type="range" id="volumeControl" min="0" max="1" step="0.01" value="1">
+</div>
+
+<div>
+  <button id="verseButton">Show Verse of the Day</button>
+  <div id="verseDisplay" style="margin-top:10px; font-weight:bold;"></div>
+</div>
+
+<script>
+// AUDIO LOGIC
+const hindiMusic = document.getElementById("backgroundMusic");
+const tamilMusic = document.getElementById("tamilMusic");
+const englishMusic = document.getElementById("englishMusic");
+
+function toggleMusic(audioId, buttonId) {
+  const audio = document.getElementById(audioId);
+  const button = document.getElementById(buttonId);
+
+  // Pause all other audios
+  [hindiMusic, tamilMusic, englishMusic].forEach(a => {
+    if (a !== audio) { a.pause(); a.currentTime = 0; }
+  });
+
+  // Toggle selected audio
+  if (audio.paused) {
+    audio.play().catch(err => console.log("Playback prevented:", err));
+    if (audioId === "backgroundMusic") button.innerText = "Stop Hindi 🎼";
+    if (audioId === "tamilMusic") button.innerText = "Stop Tamil 🎶";
+    if (audioId === "englishMusic") button.innerText = "Stop English 🎵";
+  } else {
+    audio.pause();
+    audio.currentTime = 0;
+    if (audioId === "backgroundMusic") button.innerText = "Play Hindi 🎼";
+    if (audioId === "tamilMusic") button.innerText = "Play Tamil 🎶";
+    if (audioId === "englishMusic") button.innerText = "Play English 🎵";
+  }
+}
+
+// Volume control
+document.getElementById('volumeControl').addEventListener('input', e => {
+  [hindiMusic, tamilMusic, englishMusic].forEach(audio => audio.volume = e.target.value);
+});
+
+// CONFETTI
+function triggerConfetti() {
+  const duration = 5 * 1000;
+  const end = Date.now() + duration;
+  (function frame() {
+    confetti({ particleCount: 5, angle: 60, spread: 90, origin: { x: 0 } });
+    confetti({ particleCount: 5, angle: 120, spread: 90, origin: { x: 1 } });
+    if (Date.now() < end) requestAnimationFrame(frame);
+  })();
+}
+
+// VERSE OF THE DAY
+async function loadVerse() {
+  try {
+    const res = await fetch("/random-verse"); // Node.js server must be running
+    const verse = await res.json();
+    document.getElementById("verseText").innerText = verse.text;
+    document.getElementById("verseRef").innerText = `${verse.book_name} ${verse.chapter}:${verse.verse}`;
+  } catch (err) {
+    document.getElementById("verseText").innerText = "Unable to load verse.";
+    console.error(err);
+  }
+}
+
+// Load verse on page load
+loadVerse();
+
+document.getElementById("verseButton").addEventListener("click", async () => {
+  const display = document.getElementById("verseDisplay");
+  display.innerText = "Loading...";
+  try {
+    const response = await fetch("/random-verse");
+    if (!response.ok) throw new Error("Network response was not ok");
+    const verse = await response.json();
+    display.innerText = `${verse.book_name} ${verse.chapter}:${verse.verse} — ${verse.text}`;
+  } catch (err) {
+    display.innerText = "Unable to load verse.";
+    console.error(err);
+  }
+});
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+<script>
+
+</script>
+
