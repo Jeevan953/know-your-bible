@@ -7,6 +7,7 @@ const PORT = 3000;
 
 // Serve static files (HTML, JS, CSS)
 app.use(express.static(path.join(process.cwd(), "public")));
+fetch("/.netlify/functions/random-verse")
 
 // Load the JSON file
 const dataPath = path.join(process.cwd(), "bible/kjv_fixed.json");
@@ -23,4 +24,8 @@ app.get("/random-verse", (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
+
+
+
+
 
