@@ -3,8 +3,8 @@ import React, { useRef, useState } from "react";
 const MusicPlayer = () => {
   const songs = [
     "music/hindi/Yeh Tera Husn.mp3",
-    "music/hindi/Kana Oorin Kalyanathil.mp3",
-    "music/hindi/Sakhaya Maname.mp3",
+    "music/hindi/Kana_Oorin_Kalyanathil.mp3",
+    "music/hindi/Sakhaya_Maname.mp3",
     "music/tamil/Yeasu_Rajanae.mp3",
     "music/tamil/Ullathin_Magizhchi.mp3",
     "music/tamil/Ummai_Allamal.mp3",
