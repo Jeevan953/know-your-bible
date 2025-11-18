@@ -39,4 +39,11 @@ button:hover {
   animation: pulseGlow 2s infinite;
 }
 
+.verse-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;   /* space between verse and button */
+  margin-bottom: 40px; /* extra space after verse section */
+}
 

@@ -3,8 +3,8 @@ import React, { useRef, useState } from "react";
 const MusicPlayer = () => {
   const songs = [
     "music/hindi/Yeh Tera Husn.mp3",
-    "music/hindi/Mere Dil Se Aake Lipat Gayi.mp3",
-    "music/hindi/Kaise Kategi Zindagi Tere Bagair.mp3",
+    "music/hindi/Kana Oorin Kalyanathil.mp3",
+    "music/hindi/Sakhaya Maname.mp3",
     "music/tamil/Yeasu_Rajanae.mp3",
     "music/tamil/Ullathin_Magizhchi.mp3",
     "music/tamil/Ummai_Allamal.mp3",
@@ -20,7 +20,7 @@ const MusicPlayer = () => {
   const loadSong = (index) => {
     audioRef.current.src = songs[index];
     setCurrentIndex(index);
-    if(isPlaying) audioRef.current.play();
+    if (isPlaying) audioRef.current.play();
   };
 
   const togglePlayPause = () => {
@@ -47,16 +47,28 @@ const MusicPlayer = () => {
   return (
     <div style={{ padding: "20px", border: "1px solid #ccc", borderRadius: "8px", marginBottom: "20px", backgroundColor: "#fff" }}>
       <h2>🎵 Music Player</h2>
-      <p>Current Song: {songs[currentIndex].split("/").pop()}</p>
+      <p className="music-title">
+  Current Song: {songs[currentIndex].split("/").pop()}
+</p>
+
       <audio ref={audioRef} />
-      <div>
-        <button onClick={prevSong}>⏮ Previous</button>
-        <button onClick={togglePlayPause}>{isPlaying ? "⏸ Pause" : "▶ Play"}</button>
-        <button onClick={nextSong}>⏭ Next</button>
+
+      {/* FIXED BUTTONS */}
+      <div className="controls" style={{ marginBottom: "10px" }}>
+        <button onClick={prevSong} style={{ marginRight: "10px" }}>⏮️</button>
+        <button onClick={togglePlayPause} style={{ marginRight: "10px" }}>⏯️</button>
+        <button onClick={nextSong}>⏭️</button>
       </div>
+
       <div>
         <label>Volume: </label>
-        <input type="range" min="0" max="1" step="0.01" onChange={(e) => audioRef.current.volume = e.target.value} />
+        <input
+          type="range"
+          min="0"
+          max="1"
+          step="0.01"
+          onChange={(e) => (audioRef.current.volume = e.target.value)}
+        />
       </div>
     </div>
   );

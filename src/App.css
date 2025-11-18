@@ -33,31 +33,133 @@
   }
 }
 
-.card {
-  padding: 2em;
+/* Make body full height and center content */
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(120deg, #f0f9ff, #c6f1ff); /* example background */
+  font-family: 'Arial', sans-serif;
+  text-align: center;
 }
 
-.read-the-docs {
-  color: #888;
+/* Verse section wrapper */
+.verse-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px; /* space between verse and button */
 }
 
+.verse {
+  font-size: 1.5rem;
+  max-width: 700px;
+  line-height: 1.6;
+  text-align: center;
+}
+
+.verse-button {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+/* Verse box fixed height to avoid layout jumping */
+.random-verse {
+  margin-bottom: 20px;
+  min-height: 150px;  /* <<< FIX: Keeps box height steady */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+}
+
+/* Bigger button gap */
+.random-verse button {
+  margin-top: 10px;
+}
+
+
+.verse-button:hover {
+  background-color: rgba(255,255,255,0.9);
+  transform: scale(1.05);
+}
+
+/* Music controls */
 .music-controls {
-  display: flex;      /* put buttons in a row */
-  gap: 10px;          /* space between buttons, change value as needed */
-  justify-content: center; /* center horizontally (optional) */
-  margin-top: 10px;   /* optional: spacing from other elements */
+  display: flex;
+  justify-content: center;
+  gap: 15px; /* same spacing as verse button */
+  margin-top: 10px;
 }
 
 .music-controls button {
-  padding: 10px 15px;  /* make buttons bigger */
+  padding: 10px 20px;
   font-size: 1rem;
-  border-radius: 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background-color: rgba(255,255,255,0.7);
   cursor: pointer;
+  min-width: 80px; /* prevent jumping */
+  transition: all 0.2s ease;
+}
+
+.music-controls button:hover {
+  background-color: rgba(255,255,255,0.9);
+  transform: scale(1.05);
+}
+
+.music-title {
+  min-height: 24px; /* enough for 1 line */
+  display: flex;
+  align-items: center;
+}
+
+
+/* Confetti button same as verse button */
+.confetti-button {
+  padding: 10px 20px;
+  font-size: 1rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background-color: rgba(255,255,255,0.7);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-top: 20px;
+}
+
+.confetti-button:hover {
+  background-color: rgba(255,255,255,0.9);
+  transform: scale(1.05);
+}
+
+.app-container {
+  text-align: center;
+  padding: 20px;
+  max-width: 800px;
+  margin: auto;
+  text-align: center;
+}
+
+/* Title */
+.app-title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.section {
+  margin-bottom: 40px; /* BIG gap between Verse and Music */
 }
 
 .controls button {
-  margin: 0 5px;
+  margin: 0 8px;   /* adds left + right gap */
   padding: 10px 15px;
-  font-size: 16px;
-  cursor: pointer;
+  font-size: 18px;
+  border-radius: 8px;
 }
+

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import verses from "../data/verses.json"; // Make sure this file exists
+import verses from "../data/verse.json"; // Make sure this file exists
 
 function RandomVerse() {
   const [verse, setVerse] = useState(
@@ -12,14 +12,23 @@ function RandomVerse() {
   };
 
   return (
-    <div className="random-verse">
-      <p>📖 {verse.text} – {verse.reference}</p>
-      <button onClick={handleNextVerse}>Next Verse</button>
-    </div>
+    <div className="verse-wrapper">
+  {verse && (
+    <>
+      <p className="verse">📖 {verse.text} – {verse.reference}</p>
+      <button className="verse-button" onClick={handleNextVerse}>
+        New Verse
+      </button>
+    </>
+  )}
+</div>
   );
 }
 
 export default RandomVerse;
+
+
+
 
 
 
