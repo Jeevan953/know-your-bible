@@ -1,0 +1,42 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(-45deg, #ffecd2, #fcb69f, #a1c4fd, #c2e9fb);
+  background-size: 400% 400%;
+  animation: bg 12s ease infinite;
+}
+
+@keyframes bg {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+
+button {
+  padding: 15px 25px;      /* bigger clickable area */
+  font-size: 1.2rem;       /* bigger text */
+  border-radius: 10px;     /* softer rounded corners */
+  border: 1px solid #888;
+  background-color: #f0f0f0;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+
+button:hover {
+  background-color: #ddd;
+  transform: scale(1.05);   /* subtle grow effect on hover */
+}
+
+/* For your Celebrate button specifically */
+#celebrateBtn {
+  background-color: #ff6f61;
+  color: white;
+  border: none;
+  padding: 18px 30px;
+  font-size: 1.3rem;
+  border-radius: 12px;
+  animation: pulseGlow 2s infinite;
+}
+
+
